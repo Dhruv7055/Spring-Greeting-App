@@ -1,6 +1,7 @@
 package com.example.Greeting_App.controllers;
 
 import com.example.Greeting_App.dto.MessageDTO;
+import com.example.Greeting_App.repositories.GreetingRepository;
 import com.example.Greeting_App.services.GreetingService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,12 @@ public class GreetingController {
             return "Hello "+lastName+" Welcome to Bridgelabz";
         else
             return "Hello, Welcome to Bridgelabz";
+    }
+
+    //UC4
+    @PostMapping("/save")
+    public MessageDTO save(@RequestBody MessageDTO message){
+        return greetingService.saveMessage(message);
     }
 
 }
