@@ -5,6 +5,9 @@ import com.example.Greeting_App.entities.MessageEntity;
 import com.example.Greeting_App.repositories.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class GreetingService {
 
@@ -43,6 +46,16 @@ public class GreetingService {
 
         return m2;
 
+    }
+    public List<MessageDTO> listAll(){
+
+        List<MessageDTO> list = greetingRepository.findAll().stream().map(entity -> {
+            MessageDTO m = new MessageDTO(entity.getMessage());
+            m.setId(entity.getId());
+            return m;
+        }).collect(Collectors.toList());
+
+        return list;
     }
 
 }
