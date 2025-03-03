@@ -1,12 +1,19 @@
 package com.example.Greeting_App.controllers;
 
 import com.example.Greeting_App.dto.MessageDTO;
+import com.example.Greeting_App.services.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("greetings")
 public class GreetingController {
+    GreetingService greetingService;
 
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
+    // UC1
     @GetMapping("/get")
     public String getGreetings(){
         return "{\"message\": \"Hello from GET Request!\"}";
@@ -22,6 +29,10 @@ public class GreetingController {
         return "{\""+message+": \"Hello from PUT Request!\"}";
     }
 
-
+    // UC2
+    @GetMapping("/service")
+    public String serviceGreetings(){
+        return greetingService.getGreetings();
+    }
 
 }
